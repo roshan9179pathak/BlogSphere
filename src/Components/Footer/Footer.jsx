@@ -19,11 +19,14 @@ export default function Footer() {
       <div
       className={`${'mainContainer'}`}
       >
-         <Link to='' >Home</Link>
+         {/* <Link to='' >Home</Link>
          <Link to='https://github.com/roshan9179pathak/BlogSphere'>GitHub</Link>
          <Link to= '/all-posts' >AllPost</Link>
          <Link to='/add-post'>AddPost</Link>
-          
+           */}
+
+<p>Made with ❤️ by Roshan Pathak</p>  
+
           </div>
 
     </section>
