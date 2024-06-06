@@ -10,23 +10,19 @@ export default function Footer() {
   <Container>
     <section className={`h-12 ${`forSection`} sticky bottom-0 z-50`}>
     
-      <Link 
-      to={`https://github.com`}
-      className={`cursor-pointer w-8 ${'icon'}`}
-      target="blank"
-      >
+      
       
       <img src={logo} alt="Error" 
-      className="w-11" />
-      </Link>
+      className="w-10" />
+     
 
       <div
       className={`${'mainContainer'}`}
       >
-         <Link>Home</Link>
-         <Link>GitHub</Link>
-         <Link>AllPost</Link>
-         <Link>AddPost</Link>
+         <Link to='' >Home</Link>
+         <Link to='https://github.com/roshan9179pathak/BlogSphere'>GitHub</Link>
+         <Link to= '/all-posts' >AllPost</Link>
+         <Link to='/add-post'>AddPost</Link>
           
           </div>
 

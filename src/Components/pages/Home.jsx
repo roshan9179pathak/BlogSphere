@@ -27,9 +27,11 @@ export default function Home() {
 
   if (!isLoggedIn) {
     return (
-      <div className=" text-red-700 absolute hover:scale-150 duration-200 top-[50%] left-[40%]">
+      
+      <div className=" text-slate-700 text-[30px] absolute hover:scale-150 duration-200 top-[50%] left-[30%]">
         You'r not authenticated, please Log-In to Read Post
       </div>
+      
     );
   }
 
