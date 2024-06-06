@@ -1,0 +1,14 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: 60% 20%;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "input file"
+                         "input file";
+}
+
+.input{
+    grid-area: input;
+}
+.file{
+    grid-area: file;
+}

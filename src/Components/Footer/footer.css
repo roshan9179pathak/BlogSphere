@@ -1,0 +1,33 @@
+.forSection{
+    width: 100%;
+    background-color: #F7F4ED;
+    box-shadow: 0 -5px 10px rgba(135, 58, 58, 0.5);
+    /* height: 50px; */
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid black;
+    padding: 0 20px;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.icon{
+   
+}
+
+.mainContainer{
+   margin-left: auto;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.mainContainer a{
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 10px;
+}
