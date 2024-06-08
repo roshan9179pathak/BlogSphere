@@ -67,7 +67,7 @@ export default function SignUp() {
         <Input
           type="password"
           placeholder="Enter your email here..."
-          label="Password:-"
+          label="Pass:-"
           {...register("password", {
             required: true,
           })}

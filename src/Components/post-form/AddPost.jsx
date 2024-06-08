@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function AddPost({ post }) {
+
+    const isLoggedIn = useSelector(state=> state.auth.status)
+    const navigate = useNavigate()
   const { register, handleSubmit, control, watch, setValue, getValues } =
     useForm({
       defaultValues: {
@@ -16,7 +19,6 @@ export default function AddPost({ post }) {
       },
     });
 
-  const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const upload = async (data) => {
     if (post) {
@@ -38,14 +40,18 @@ export default function AddPost({ post }) {
       if (file !== null) {
         const fileId = file.$id;
         data.featuredImage = fileId;
-        const dbPost = await services.createPost({
-          ...data,
-          userId: userData.$id,
-        });
-        
-        if (dbPost) {
-          navigate(`/post/${dbPost.$id}`);
-        }
+
+        const dbPost = await services
+          .createPost({
+            ...data,
+            userId: userData.$id,
+          })
+          .then((dbPost) => {
+            if (dbPost) navigate(`/post/${dbPost.$id}`);
+          })
+          .catch((error) => {
+            alert(`Error:: post with same title already exists`);
+          });
       }
     }
   };
@@ -71,13 +77,14 @@ export default function AddPost({ post }) {
     return () => subscribe.unsubscribe();
   }, [watch, slugTransform, setValue]);
 
-  return (
+  return isLoggedIn? (
     <Container>
       <form onSubmit={handleSubmit(upload)}>
         <div className="flex justify-between px-3">
           <div className="flex flex-col justify-center">
             <Input
               label="Title"
+              required={true}
               className="border-2 border-black"
               type="text"
               placeholder="Your title goes here..."
@@ -89,6 +96,7 @@ export default function AddPost({ post }) {
               className="border-2 border-black"
               label="Slug"
               type="text"
+              required={true}
               placeholder="Post slug..."
               {...register("slug", { required: true })}
               onInput={(e) => {
@@ -101,6 +109,8 @@ export default function AddPost({ post }) {
 
           <div className="flex flex-col justify-start items-center">
             <Input
+            required={true}
+            label='Image'
               type="file"
               accept="image/png, image/jpg, image/jpeg, image/gif"
               {...register("image", {
@@ -134,5 +144,5 @@ export default function AddPost({ post }) {
         />
       </form>
     </Container>
-  );
+  ): navigate('/')
 }

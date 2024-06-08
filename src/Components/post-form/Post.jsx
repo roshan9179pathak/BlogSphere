@@ -11,6 +11,8 @@ export default function Post() {
   const userData = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
 
+  const isLoggedIn = useSelector((state)=> state.auth.status)
+
   const isAuthor = post && userData ? post.userId === userData.$id : false;
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function Post() {
     });
   };
 
-  return post ? (
+  return post && isLoggedIn ? (
     <div className="w-full min-h-full flex flex-col justify-center items-center ">
       <div className="my-7">
         <img className="w-[400px] h-[400px] rounded-xl"
@@ -67,7 +69,7 @@ export default function Post() {
 
       <div className="mt-2">{parse(post.content)}</div>
     </div>
-  ) : (
-    <div>No Post to show</div>
-  );
+  ) : 
+    navigate('/')
+  
 }

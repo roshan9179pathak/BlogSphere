@@ -35,6 +35,7 @@ export class Configure{
             
         } catch (error) {
             console.log(`Error occured in config:: createPost`,error.message);
+            throw error.message;
         }
     }
 
@@ -58,7 +59,7 @@ export class Configure{
 
         async deletePost(slug){
             try {
-                return await this.databases.deleteDocument(
+                 await this.databases.deleteDocument(
                     conf.appwriteDatabaseId,
                     conf.appwriteCollectionId,
                     slug
@@ -83,13 +84,14 @@ export class Configure{
         }
       }  
 
-      async getAllposts(query = []){
+      async getAllposts(query){
         try {
-           return await this.databases.listDocuments(
+            return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                query
+                [query]
             )
+            
         } catch (error) {
             console.log(`Error occured in :: appwrite :: getAllposts`,error);
             return false

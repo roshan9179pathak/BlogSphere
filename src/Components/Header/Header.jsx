@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 // import './header.css'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Container, LogoutBtn,Button } from "../index";
-import { login } from "../../store/AuthProvider";
+import { Container, LogoutBtn, Button } from "../index";
+import { login, logout } from "../../store/AuthProvider";
 export default function Header() {
   const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const navItems = [
     {
@@ -38,6 +39,12 @@ export default function Header() {
     // },
   ];
 
+  const handleAuthorized = (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem('isLoggedIn');
+    dispatch(logout);
+  };
+
   return (
     <Container className="sticky top-0 z-30">
       <header className="">
@@ -57,8 +64,7 @@ export default function Header() {
             <ul className={`flex ml-auto list-none`}>
               {navItems.map((item) =>
                 item.active ? (
-
-                    <li key={item.name} className="mx-3 inline-block">
+                  <li key={item.name} className="mx-3 inline-block">
                     <button
                       className="w-[80px] h-8 rounded-md font-bold text-slate-800"
                       onClick={() => navigate(item.slug)}
@@ -66,24 +72,23 @@ export default function Header() {
                       {item.name}
                     </button>
                   </li>
-                  
                 ) : null
               )}
 
               {authStatus && (
                 <li>
-                  <LogoutBtn>LogOut</LogoutBtn>
+                  <LogoutBtn onClick={handleAuthorized}>LogOut</LogoutBtn>
                 </li>
               )}
 
               {!authStatus && (
                 <li>
                   <Button
-                  className='inline-bock bg-[#414141] text-white px-6 py-2 duration-200 active:bg-red-500 rounded-full relative top-[-5px]'
-
-                    onClick={()=>navigate('sign-up')}
-
-                  >Get-Started</Button>
+                    className="inline-bock bg-[#414141] text-white px-6 py-2 duration-200 active:bg-red-500 rounded-full relative top-[-5px]"
+                    onClick={() => navigate("sign-up")}
+                  >
+                    Get-Started
+                  </Button>
                 </li>
               )}
             </ul>

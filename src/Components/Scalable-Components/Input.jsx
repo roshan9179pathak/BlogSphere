@@ -1,10 +1,11 @@
 import React,{useId,useRef} from 'react'
-
+import './input.css'
 function Input({
-    label,
+    label='',
     className,
     type='text',
     placeholder='',
+    required = false,
     ...props
 },ref) {
     
@@ -16,6 +17,7 @@ function Input({
         <label 
         htmlFor={id}
         className={`inline-block mb-1 text-black font-[500] text-lg`}>
+            {required && <span className={`${'required'}`}>*</span>}
             {label}
             </label>}
 </div>
@@ -27,6 +29,7 @@ function Input({
         placeholder={placeholder}
         {...props}
         ref={ref}
+        required={required}
         id={id}
         
         >
