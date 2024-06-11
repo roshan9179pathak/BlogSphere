@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import services from "../../Appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import './addpost.css'
 
 export default function AddPost({ post }) {
 
@@ -78,14 +79,14 @@ export default function AddPost({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return isLoggedIn? (
-    <Container>
+    <Container className={``}>
       <form onSubmit={handleSubmit(upload)}>
-        <div className="flex justify-between px-3">
+        <div className={`flex justify-between px-3 ${'input-container'}`}>
           <div className="flex flex-col justify-center">
             <Input
               label="Title"
               required={true}
-              className="border-2 border-black"
+              className={`border-2 border-black`}
               type="text"
               placeholder="Your title goes here..."
               {...register("title", {
@@ -107,7 +108,7 @@ export default function AddPost({ post }) {
             />
           </div>
 
-          <div className="flex flex-col justify-start items-center">
+          <div className={`flex flex-col justify-start px-2 items-center`}>
             <Input
             required={true}
             label='Image'
@@ -118,19 +119,21 @@ export default function AddPost({ post }) {
               })}
             />
 
-            <Select
+          
+           <Select
               label="Status"
-              className="w-[250px] ml-3 border-2 border-black"
+              className={`w-[330px] ml-3 border-2 border-black`}
               options={["active", "inactive"]}
               {...register("status", {
                 required: true,
               })}
             />
+          
 
             <Button
               bgColor={post ? "bg-green-500" : "bg-[#222F3E]"}
               type="submit"
-              className="w-[120px] h-10 rounded-lg text-white my-3"
+              className={`w-[120px] h-10 rounded-lg text-white my-3 ${'tab-button'} `}
             >
               {post ? "Update" : "Submit"}
             </Button>
@@ -138,6 +141,7 @@ export default function AddPost({ post }) {
         </div>
 
         <Rte
+          
           name="content"
           control={control}
           defaultValue={getValues("content")}

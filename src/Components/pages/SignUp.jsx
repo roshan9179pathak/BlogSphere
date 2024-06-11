@@ -3,7 +3,7 @@ import { Container, Input } from "../index";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/AuthProvider";
 import authservices from "../../Appwrite/auth";
-import { useSelector } from "react-redux";
+import './login.css'
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 export default function SignUp() {
@@ -15,12 +15,11 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const handleSignUp = async (data) => {
-    setError('')
+    // setError('')
     try {
       const user = await authservices.createAccount(data);
       if (user) {
         const userData = await authservices.getCurrentUser();
-        // console.log(userData);
         if (userData !== null) {
           dispatch(login(userData));
           navigate("/");
@@ -33,11 +32,11 @@ export default function SignUp() {
 
   return (
     <div
-      className="bg-[#f4f7ea] w-[500px] h-[500px] rounded-lg border-2 border-black
-       absolute top-0 bottom-0 my-auto left-0 right-0 mx-auto
-       "
+      className={` bg-[#f4f7ea] w-[500px] h-[500px] rounded-lg border-2 border-black
+       absolute top-0 bottom-0 my-auto left-0 right-0 mx-auto ${'form-container'}
+       `}
     >
-      {error && (
+       {error && (
         <p className="w-full text-center text-red-600 mt-14">{error}</p>
       )}
 
@@ -75,18 +74,22 @@ export default function SignUp() {
 
         <button
           type="submit"
-          className="w-[100px] h-9 bg-[#414141] text-white 
+          className={`${'for-button'} w-[100px] h-9 bg-[#023047] text-white 
             active:bg-white
-        rounded-lg absolute left-0 right-0 mx-auto"
+        rounded-lg absolute left-0 right-0 mx-auto`}
         >
           Sign-Up
         </button>
       </form>
 
           {!error && 
-          <div className="w-full absolute top-[60%] left-[20px]">
+          <div className={`${'for-instructions'} w-full absolute top-[60%] left-[20px]`}>
           <h3 className="font-semibold">Password Requirenments:</h3>
-          <ul>
+          <ul >
+
+              <li className="inst-for-mob" style={{display: 'none'}}>Password Should be <span className="text-red-500 font-semibold">8-16 </span>characters long, with 1 special character <span className="text-red-500 font-semibold">ex-'@#$%!*&^'</span>, and a number <span className="text-red-500 font-semibold">'0-9'</span></li>
+
+            <span className="inst-not-mob" style={{display:'block'}}>
             <li>
               Should contain atleast{" "}
               <span className="text-red-500 font-semibold">8-16 characters</span>
@@ -99,6 +102,7 @@ export default function SignUp() {
               Should contain atleast 1 numeric character{" "}
               <span className="text-red-500 font-semibold">'0123456789'</span>
             </li>
+            </span>
           </ul>
         </div>
           }

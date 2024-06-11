@@ -1,0 +1,44 @@
+/* for-mobile */
+@media (min-width: 344px) and (max-width: 450px) {
+  .form-container {
+    max-width: 90vw;
+    padding: 0 10px;
+  }
+  .for-instructions {
+    font-size: 12px;
+    margin-top: 100px;
+    margin-right: 10px;
+  }
+  .inst-for-mob{
+    position: absolute;
+    display: block !important;
+    font-size: 12px !important;
+    left: -10px;
+  }
+  .inst-not-mob{
+    display: none !important;
+  }
+}
+
+
+/* for-tabs */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .form-container {
+        min-width: 90vw;
+        min-height: 70vh;
+        padding: 0 10px;
+      }
+
+      .for-instructions {
+        font-size: 25px;
+        margin-top: 100px;
+      }
+
+      .for-button{
+        min-width: 150px;
+        min-height: 60px;
+        font-size: 25px;
+        margin-top: 20px;
+      }
+}

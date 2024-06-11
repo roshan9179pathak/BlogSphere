@@ -1,11 +1,130 @@
-.forUl{
-    list-style: none;
-    
+.forUl {
+  list-style: none;
 }
 
-li{
+li {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 18px;
+  color: black;
+}
+
+@media (min-width: 344px) and (max-width: 490px) {
+  .header-container {
+    position: relative;
+  }
+  .mob-logo {
+    width: 30px !important;
+  }
+
+  #check:checked ~ .mob-menu {
+    left: 0%;
+  }
+
+  .mob-menu {
+    position: absolute !important;
+    top: 56px !important;
+    left: -100%;
+    width: 100vw !important;
+    height: calc(100vh - 56px);
+    background-color: #f7f4ed !important;
+    overflow: hidden;
+    transition: all 0.5s linear;
+  }
+
+  .mob-ul {
+    position: absolute !important;
+    top: 50px !important;
+    left: 20px !important;
+  }
+
+  .mob-li {
+    display: inline-block;
+    margin: 20px 100px;
+  }
+  .mob-li:active{
+    
+  }
+
+  .mob-logout {
+    margin: 10px 85px;
+  }
+
+  .hamburger-menu {
+    float: right;
+    margin-right: 20px;
+    margin-top: 5px;
+    font-size: 30px;
+  }
+
+  .open{
+    display: block;
+  }
+  .close {
+    display: none;
+  }
+
+  #check:checked ~ label .open{
+    display: none;
+  }
+
+  #check:checked ~ label .close{
+    display: block;
+  }
+
+  #show-page:checked ~ .mob-menu{
+    left: -100%;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mob-menu {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+  }
+  .open,.close{
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mob-menu {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+  }
+  .mob-ul {
+    display: flex;
+  }
+  .mob-li {
+   
+    display: inline-block;
+    margin: 0 12px;
+  }
+
+    .header-options{
+       
+    }
+
+  .header-options:hover:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    width: 90%;
+    height: 2px;
+    background: #414141;
+  }
+  .open,.close{
+    display: none;
+  }
+
+  li {
     display: inline-block;
     margin: 0 10px;
-    font-size: 20px;
+    font-size: 18px;
     color: black;
+  }
 }

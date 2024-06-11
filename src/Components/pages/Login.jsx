@@ -3,7 +3,7 @@ import { Container, Input } from "../index";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/AuthProvider";
 import authservices from "../../Appwrite/auth";
-import { useSelector } from "react-redux";
+import './login.css'
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -32,15 +32,15 @@ export default function Login() {
 
   return (
     <div
-      className="bg-[#f4f7ea] w-[500px] h-[500px] rounded-lg border-2 border-black
-       absolute top-0 bottom-0 my-auto left-0 right-0 mx-auto
-       "
+      className={`bg-[#f4f7ea] w-[500px] h-[500px] rounded-lg border-2 border-black
+       absolute top-0 bottom-0 my-auto left-0 right-0 mx-auto ${'form-container'}
+       `}
     >
       {error && (
         <p className="w-full text-center text-red-600 mt-14">{error}</p>
       )}
 
-      <form onSubmit={handleSubmit(handleLogin)} className="mt-[50px]">
+      <form onSubmit={handleSubmit(handleLogin)} className={`mt-[50px]`}>
         <Input
           type="email"
           placeholder="Enter your email here..."
@@ -65,7 +65,7 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-[100px] h-9 bg-[#222F3E] text-white rounded-lg absolute left-0 right-0 mx-auto"
+          className={`w-[100px] h-9 bg-[#023047] text-white rounded-lg absolute left-0 right-0 mx-auto ${'for-button'}`}
         >
           Sign-In
         </button>

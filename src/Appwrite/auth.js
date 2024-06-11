@@ -51,7 +51,7 @@ export class AuthServices{
         return await this.account.get()
         
     } catch (error) {
-       return null
+       throw error
     }
 
     // return null

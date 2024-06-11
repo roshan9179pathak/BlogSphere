@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import services from "../../Appwrite/config";
 import { Query } from "appwrite";
+import "./home.css";
 import { Container } from "../index";
 import { useSelector } from "react-redux";
 
@@ -42,23 +43,35 @@ export default function AllPosts() {
 
   if (!isLoggedIn) {
     return (
-      
-      <div className=" text-slate-700 text-[30px] absolute hover:scale-150 duration-200 top-[50%] left-[30%]">
+      <Container
+        className={`flex-grow bg-[#F7F4ED] 
+        text-[30px]
+      flex justify-center items-center`}
+      >
+      <div className=" text-slate-700 text-[30px] duration-500 absolute hover:scale-150 top-[50%] left-[30%]">
         {navigate('/')}
         You'r not authenticated, please Log-In to Read Post
       </div>
+      </Container>
     );
   }
 
   if (isLoggedIn && posts.length > 0 && isAuthor) {
     return (
-      <Container>
-        <div className="w-full h-full flex flex-wrap">
-          {posts.map((post) => (
-            <div className="mx-2" key={post.$id}>
-              <Postcard {...post} />
-            </div>
-          ))}
+    
+    <Container
+        className={`flex-grow bg-[#F7F4ED] 
+        text-[30px]
+      `}
+      >
+        <div className={`px-3`}>
+          <div className={`${"grid-container"} ${'for-tab'}`}>
+            {posts.map((post) => (
+              <div className="mx-2 hover:scale-105 duration-300" key={post.$id}>
+                <Postcard {...post} />
+              </div>
+            ))}
+          </div>{" "}
         </div>
       </Container>
     );

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './container.css'
 export default function Container({
     children, 
     className=''
@@ -8,7 +8,7 @@ export default function Container({
 
     return (
         <div
-        className={`w-full ${className}`}
+        className={`w-full ${className} ${'responsive-container'}`}
         >
             {children}
         </div>

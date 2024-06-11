@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import {Provider} from 'react-redux'
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {RouterProvider, createBrowserRouter } from 'react-router-dom'
 import * as Comp from './Components/index.js'
 import store from './store/auth.js'
 

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { Container } from "../index";
 import services from "../../Appwrite/config";
 import { Query } from "appwrite";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -43,25 +42,35 @@ export default function Home() {
 
   if (!isLoggedIn) {
     return (
-      <div className=" text-slate-700 text-[30px] absolute hover:scale-150 duration-200 top-[50%] left-[30%]">
-        You'r not authenticated, please Log-In to Read Post
-      </div>
+      <Container
+        className={`flex-grow bg-[#F7F4ED] 
+        text-[30px]
+      flex justify-center items-center ${'authMessage'}`}
+      >
+        <p className={`hover:scale-150 duration-500 text-black ${'para'}`}>
+          You'r not authenticated, please Log-In to Read Post
+        </p>
+      </Container>
     );
   }
 
   if (isLoggedIn && posts.length > 0 && isAuthor) {
     return (
-      <div className={`flex flex-wrap px-3 ${"grid-container"}`}>
-        <Container>
-          <div className="w-full h-full flex flex-wrap">
+      <Container
+        className={`flex-grow bg-[#F7F4ED] 
+        text-[30px]
+      `}
+      >
+        <div className={`px-3`}>
+          <div className={`${"grid-container"} ${'for-tab'}`}>
             {posts.map((post) => (
-              <div className="mx-2" key={post.$id}>
+              <div className="mx-2 hover:scale-105 duration-300" key={post.$id}>
                 <Postcard {...post} />
               </div>
             ))}
-          </div>
-        </Container>
-      </div>
+          </div>{" "}
+        </div>
+      </Container>
     );
   }
 

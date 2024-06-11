@@ -4,6 +4,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import services from "../../Appwrite/config";
 import parse from "html-react-parser";
 import Button from "../Misc/Button";
+import {Container} from '../index'
+import './post.css'
 export default function Post() {
   const [post, setPost] = useState(null);
   const { slug } = useParams();
@@ -37,16 +39,21 @@ export default function Post() {
   };
 
   return post && isLoggedIn ? (
-    <div className="w-full min-h-full flex flex-col justify-center items-center ">
-      <div className="my-7">
-        <img className="w-[400px] h-[400px] rounded-xl"
+    <Container
+    className={`flex-grow bg-[#F7F4ED] 
+   
+  `}
+  >
+    <div className={` ${'image-container'} w-full min-h-full flex flex-col justify-center items-center `}>
+      <div className={`${'for-image'} my-7`}>
+        <img className="rounded-xl"
           src={services.getFilePreview(post.featuredImage)}
           alt={post.title}
         />
       </div>
 
       {isAuthor && (
-        <div>
+        <div className= {`${'for-buttons'}`}>
           <Link to={`/edit-post/${post.$id}`}>
           <Button className="mx-1 mb-2 w-[100px] h-10 rounded-xl" bgColor="bg-green-500">
             Edit
@@ -67,8 +74,9 @@ export default function Post() {
       {post.title}
         </h2></div>
 
-      <div className="mt-2">{parse(post.content)}</div>
+      <div className="mt-2 text-center mb-3">{parse(post.content)}</div>
     </div>
+   </Container>
   ) : 
     navigate('/')
   

@@ -7,22 +7,23 @@ import { Header } from "./Components";
 import { Outlet } from "react-router-dom";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       event.preventDefault();
-      authservices.authLogout()
-      dispatch(logout())
-      const message = "Are you sure you want to leave? Your changes may not be saved.";
+      authservices.authLogout();
+      dispatch(logout());
+      const message =
+        "Are you sure you want to leave? Your changes may not be saved.";
       event.returnValue = message; // Standard way to set a message
       return message; // For some browsers
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 
@@ -31,7 +32,7 @@ function App() {
       <Header />
 
       {/* For this I am using css flex box */}
-      <main className="bg-white h-full flex-grow overflow-hidden">
+      <main className="flex-grow flex bg-[#F7F4ED] ">
         <Outlet />
       </main>
 

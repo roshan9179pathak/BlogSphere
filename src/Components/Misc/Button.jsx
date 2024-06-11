@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './button.css'
 export default function Button({
     children,
     className = '',
@@ -11,11 +11,13 @@ export default function Button({
     
 
     return (
-        <button
-        className={` ${bgColor} ${className}`}
+        <div className={`${'button-container'}`}>
+            <button
+        className={`${bgColor} ${className}`}
         {...props}
         >
             {children}
         </button>
+        </div>
     )
 }
