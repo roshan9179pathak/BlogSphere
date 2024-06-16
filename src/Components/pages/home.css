@@ -5,6 +5,10 @@
   justify-items: center;
 }
 
+.home-login{
+  display: none;
+}
+
 /* for mobile phones */
 @media (min-width:344px) and (max-width:450px) {
   .for-tab{
@@ -14,6 +18,10 @@
 
   .authMessage{
     padding: 0 10px;
+  }
+  .home-login{
+    margin-top: 40px;
+    display: block;
   }
 }
 

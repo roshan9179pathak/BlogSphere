@@ -31,3 +31,9 @@
     font-weight: 500;
     margin: 0 10px;
 }
+
+@media (min-width: 344px) and (max-width: 490px) {
+    .footer-logo{
+        width: 30px !important;
+    }
+}

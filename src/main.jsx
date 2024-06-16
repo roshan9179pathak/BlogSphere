@@ -6,6 +6,9 @@ import {Provider} from 'react-redux'
 import {RouterProvider, createBrowserRouter } from 'react-router-dom'
 import * as Comp from './Components/index.js'
 import store from './store/auth.js'
+import authservices from './Appwrite/auth.js'
+
+
 
 const router = createBrowserRouter([
   {

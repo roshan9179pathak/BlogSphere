@@ -14,7 +14,8 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .for-image{
-        min-width: 80vw;
+        min-width: 10vw;
+        border: 2px solid black;
     }
     .image-container{
         padding: 0 10px;
@@ -23,5 +24,11 @@
         display: flex;
         justify-content: center;
         
+    }
+}
+
+@media (min-width:1024px) {
+    .for-image{
+        min-width: 10vw;
     }
 }

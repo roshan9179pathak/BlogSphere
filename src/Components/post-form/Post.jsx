@@ -44,13 +44,15 @@ export default function Post() {
    
   `}
   >
-    <div className={` ${'image-container'} w-full min-h-full flex flex-col justify-center items-center `}>
+     
+    <div className={` ${'image-container'} mx-auto w-[40vw] min-h-full flex flex-col justify-center items-center `}>
       <div className={`${'for-image'} my-7`}>
-        <img className="rounded-xl"
+        <img className="rounded-xl border-2 border-black"
           src={services.getFilePreview(post.featuredImage)}
           alt={post.title}
         />
       </div>
+      
 
       {isAuthor && (
         <div className= {`${'for-buttons'}`}>

@@ -29,7 +29,7 @@ li {
     height: calc(100vh - 56px);
     background-color: #f7f4ed !important;
     overflow: hidden;
-    transition: all 0.5s linear;
+    transition: all 0.3s linear;
   }
 
   .mob-ul {
@@ -74,6 +74,12 @@ li {
 
   #show-page:checked ~ .mob-menu{
     left: -100%;
+  }
+
+  .sign-up-mob{
+    position: absolute;
+    top: 80px;
+    left: 60px;
   }
 
 }

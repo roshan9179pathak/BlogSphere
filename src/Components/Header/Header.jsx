@@ -4,15 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Container, LogoutBtn, Button } from "../index";
-import { logout } from "../../store/AuthProvider";
 import "./header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+
 export default function Header() {
   const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState(true)
+  const [isChecked, setIsChecked] = useState(true);
 
   const navItems = [
     {
@@ -42,23 +41,22 @@ export default function Header() {
     // },
   ];
 
-  const handleAuthorized = (e) => {
-    e.preventDefault();
-    sessionStorage.removeItem("isLoggedIn");
-    dispatch(logout);
+  const handleIcon = () => {
+    if (isChecked === false) setIsChecked(true);
+    else setIsChecked(false);
   };
 
-  const handleIcon = ()=>{
-    if(isChecked === false)
-    setIsChecked(true)
-    else
-    setIsChecked(false)
-  }
+   const handleClick = (item_slug) => {
+    setIsChecked(false);
+    navigate(item_slug);
+  };
 
-  const handleClick = (item_slug)=>{
-    setIsChecked(false)
-    navigate(item_slug)
-  }
+  const handleSignUp = () => {
+    setIsChecked(false);
+    navigate("sign-up");
+  };
+
+
 
   return (
     <Container className="sticky top-0 z-30">
@@ -74,10 +72,23 @@ export default function Header() {
             />
           </Link>
 
-          <input type="checkbox" checked={isChecked} id="check" style={{ display: "none" }} />
-          <label htmlFor="check" className={`${"hamburger-menu"}`} >
-           <FontAwesomeIcon icon={faBars} className={`open`} onClick={handleIcon} />
-            <FontAwesomeIcon icon={faXmark} className={`close`} onClick={handleIcon} />
+          <input
+            type="checkbox"
+            checked={isChecked}
+            id="check"
+            style={{ display: "none" }}
+          />
+          <label htmlFor="check" className={`${"hamburger-menu"}`}>
+            <FontAwesomeIcon
+              icon={faBars}
+              className={`open`}
+              onClick={handleIcon}
+            />
+            <FontAwesomeIcon
+              icon={faXmark}
+              className={`close`}
+              onClick={handleIcon}
+            />
           </label>
 
           <div
@@ -100,14 +111,16 @@ export default function Header() {
                 )}{" "}
                 {authStatus && (
                   <li className={`${"mob-logout"}`}>
-                    <LogoutBtn onClick={handleAuthorized}>LogOut</LogoutBtn>
+                    
+                    <LogoutBtn>LogOut</LogoutBtn>
+                    
                   </li>
                 )}
                 {!authStatus && (
-                  <li>
+                  <li className={`${"sign-up-mob"}`}>
                     <Button
-                      className="inline-bock bg-[#023047] text-white px-6 py-2 duration-200 active:bg-red-500 rounded-full relative top-[-8px]"
-                      onClick={() =>  navigate("sign-up")}
+                      className={`inline-bock bg-[#023047] text-white px-6 py-2 duration-200 active:bg-red-500 rounded-full relative top-[-4px] `}
+                      onClick={handleSignUp}
                     >
                       Sign-Up
                     </Button>

@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
+import {login} from '../../store/AuthProvider'
 import Postcard from "../Post-Page/Postcard";
 import "./home.css";
 import error from "./pngwing.com.png";
-import { useSelector } from "react-redux";
-import { Container } from "../index";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Container } from "../index";
 import services from "../../Appwrite/config";
 import { Query } from "appwrite";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [isAuthor, setIsAuthor] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const isLoggedIn = useSelector((state) => state.auth.status);
-  const userData = useSelector((state) => state.auth.userData);
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
+  const [userData, setUserData] = useState(useSelector((state) => state.auth.userData))
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
+  const loggedUser = useSelector(state=> state.auth.status)
+  console.log(loggedUser);
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       if ((isLoggedIn && posts.length === 0) || !isAuthor) {
@@ -24,6 +31,22 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [isLoggedIn, posts, isAuthor]);
 
+  useEffect(()=>{
+    const activeUser = JSON.parse(localStorage.getItem('userSession'))
+    console.log(activeUser);
+    if(activeUser){
+      dispatch(login(activeUser))
+      setIsLoggedIn(true)
+      setIsAuthor(true)
+      setUserData(activeUser)}
+    
+      else{
+        setIsLoggedIn(loggedUser)
+
+      }
+    
+  },[isLoggedIn,loggedUser])
+
   let query;
 
   useEffect(() => {
@@ -33,23 +56,28 @@ export default function Home() {
       query = Query.equal("userId", ["null"]);
     }
     services.getAllposts(query).then((posts) => {
+      console.log(posts);
       if (posts) {
         setIsAuthor(posts.documents[0].userId === userData.$id);
         setPosts(posts.documents);
       }
     });
-  }, []);
+  }, [isAuthor]);
 
   if (!isLoggedIn) {
     return (
       <Container
         className={`flex-grow bg-[#F7F4ED] 
         text-[30px]
-      flex justify-center items-center ${'authMessage'}`}
+      flex flex-col justify-center items-center ${'authMessage'}`}
       >
         <p className={`hover:scale-150 duration-500 text-black ${'para'}`}>
           You'r not authenticated, please Log-In to Read Post
         </p>
+
+        <Button 
+        onClick={()=> navigate('login')}
+        className={`bg-[#023047] text-white rounded-lg py-1 w-20 text-[20px] ${'home-login'}`}>Login</Button>
       </Container>
     );
   }

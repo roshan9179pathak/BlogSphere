@@ -13,7 +13,7 @@ export default function Footer() {
       
       
       <img src={logo} alt="Error" 
-      className="w-10" />
+      className={`w-10 ${'footer-logo'}`} />
      
 
       <div

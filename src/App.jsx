@@ -7,25 +7,7 @@ import { Header } from "./Components";
 import { Outlet } from "react-router-dom";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      authservices.authLogout();
-      dispatch(logout());
-      const message =
-        "Are you sure you want to leave? Your changes may not be saved.";
-      event.returnValue = message; // Standard way to set a message
-      return message; // For some browsers
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+ 
 
   return (
     <div className="flex flex-col min-h-screen">

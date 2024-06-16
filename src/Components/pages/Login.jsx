@@ -3,7 +3,7 @@ import { Container, Input } from "../index";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/AuthProvider";
 import authservices from "../../Appwrite/auth";
-import './login.css'
+import "./login.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -17,9 +17,12 @@ export default function Login() {
     setError("");
     try {
       const session = await authservices.authLogin(data);
+
       if (session) {
         const userData = await authservices.getCurrentUser();
+
         if (userData) {
+          localStorage.setItem("userSession", JSON.stringify(userData));
           dispatch(login(userData));
           navigate("/");
         }
@@ -33,7 +36,7 @@ export default function Login() {
   return (
     <div
       className={`bg-[#f4f7ea] w-[500px] h-[500px] rounded-lg border-2 border-black
-       absolute top-0 bottom-0 my-auto left-0 right-0 mx-auto ${'form-container'}
+       absolute top-0 bottom-0 my-auto left-0 right-0 mx-auto ${"form-container"}
        `}
     >
       {error && (
@@ -65,11 +68,20 @@ export default function Login() {
 
         <button
           type="submit"
-          className={`w-[100px] h-9 bg-[#023047] text-white rounded-lg absolute left-0 right-0 mx-auto ${'for-button'}`}
+          className={`w-[100px] h-9 bg-[#023047] text-white rounded-lg absolute left-0 right-0 mx-auto ${"for-button"}`}
         >
           Sign-In
         </button>
       </form>
+      <span className={`sign-up-message`}>
+        Don't have an account{" "}
+        <button
+          className={`hover:scale-105 duration-200`}
+          onClick={() => navigate("/sign-up")}
+        >
+          Sign-Up
+        </button>
+      </span>
     </div>
   );
 }
